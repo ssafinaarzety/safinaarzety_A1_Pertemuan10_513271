@@ -1,0 +1,87 @@
+# Variabel global untuk menyimpan data Buku
+buku = []
+
+# Fungsi untuk menampilkan semua data
+def show_data():
+    # Cek apakah ada data buku
+    if not buku:
+        print("BELUM ADA DATA")
+    else:
+        # Tampilkan data buku
+        for indeks, judul in enumerate(buku):
+            print("[%d] %s" % (indeks, judul))
+
+# Fungsi untuk menambah data
+def insert_data():
+    # Minta judul buku baru
+    judul = input("Judul Buku: ")
+
+    # Tambah data buku baru
+    buku.append(judul)
+
+# Fungsi untuk edit data
+def edit_data():
+    # Tampilkan data buku
+    show_data()
+
+    # Minta ID buku yang akan diedit
+    try:
+        indeks = int(input("Inputkan ID buku: "))
+        if indeks < 0 or indeks >= len(buku):
+            print("ID salah")
+            return
+        judul_baru = input("Judul baru: ")
+
+        # Edit data buku
+        buku[indeks] = judul_baru
+    except ValueError:
+        print("ID harus berupa bilangan bulat.")
+
+# Fungsi untuk menghapus data
+def delete_data():
+    # Tampilkan data buku
+    show_data()
+
+    # Minta ID buku yang akan dihapus
+    try:
+        indeks = int(input("Inputkan ID buku: "))
+        if indeks < 0 or indeks >= len(buku):
+            print("ID salah")
+            return
+        buku.pop(indeks)
+    except ValueError:
+        print("ID harus berupa bilangan bulat.")
+
+# Fungsi untuk menampilkan menu
+def show_menu():
+    print("\n")
+    print("----------- MENU ----------")
+    print("[1] Show Data")
+    print("[2] Insert Data")
+    print("[3] Edit Data")
+    print("[4] Delete Data")
+    print("[5] Exit")
+    menu = input("PILIH MENU> ")
+    print("\n")
+
+    # Validasi input menu
+    while menu not in ["1", "2", "3", "4", "5"]:
+        print("Salah pilih!")
+        menu = input("PILIH MENU> ")
+
+    # Eksekusi fungsi sesuai menu yang dip ilih
+    if menu == "1":
+        show_data()
+    elif menu == "2":
+        insert_data()
+    elif menu == "3":
+        edit_data()
+    elif menu == "4":
+        delete_data()
+    elif menu == "5":
+        exit()
+
+# Fungsi utama
+if __name__ == "__main__":
+    while True:
+        show_menu()
